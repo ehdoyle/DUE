@@ -1246,9 +1246,10 @@ if [ "$DO_BUILD" = "TRUE" ];then
         # The above dpkg-source -x should have generated this directory.
         # If not, we've no idea where to go, and are done.
 
-        packageName=$( basename "${BUILD_SOURCE_DSC_FILE%%_*}" )
-
-        packageName=$( basename "${BUILD_SOURCE_DSC_FILE%%_*}" )
+        # Get the name of the file in case it has a '_'_
+        packageName=$(basename "$BUILD_SOURCE_DSC_FILE")
+        # Now get just the name.
+        packageName=${packageName%%_*}
 
         # list most recent directory
         buildDir=$( ls -1rd -- */ | grep "$packageName" | tail -n 1)
